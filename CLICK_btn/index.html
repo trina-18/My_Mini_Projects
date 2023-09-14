@@ -19,7 +19,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="
        /* .bg-image{
         background-image: url('https://images.unsplash.com/photo-1591969852023-190295e484bd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8ODJ8fHxlbnwwfHx8fHw%3D&auto=format&fit=crop&w=500&q=60');
        
-       }*/
+       }*/ 
 
        
         body{      
@@ -51,7 +51,10 @@ href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="
             overflow: hidden;
             outline: none;
             cursor: pointer;
-        } 
+        }  
+        #btn:active{
+            transform: scale(0.95);
+        }
         /* #btn:hover span{
             animation: btn-animation 1s ease;
             cursor: pointer;
@@ -92,7 +95,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="
     </style>
 </head>
 
-   <body>
+   <body onload="ShowAlert();">
     <div class="container btnContainer">
          <button id="btn" onclick="ShowImage()">Click Me <!---<span></span>-----> </button>
         
@@ -109,7 +112,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="
         const button = document.querySelector('#btn');
         const image = document.querySelector('.btnContainer');
 
-        let isImageVisible = false;
+       // let isImageVisible = false;
 
         button.addEventListener('click', (e) => {
             let span = document.createElement("span");
@@ -169,7 +172,13 @@ href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="
     body.style.width = "50%";
     
     let backgroundImageVisible = true;
-    let text = document.querySelector('#marquee');
+    let text = document.querySelector('#marquee'); 
+
+    function ShowAlert(){
+        let name = window.prompt("Your name ?");
+        let str = "Nice to meet you " + name.toUpperCase() + "!!";
+        alert(str);
+    }
    
     function ShowImage(){
         
