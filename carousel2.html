@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>||Food Images||</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .img-container {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+      }
+      .images {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+      .image > img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        background-position: center;
+        background-size: cover;
+      }
+      .image {
+        position: absolute;
+        opacity: 0;
+        inset: 0;
+        transition: 200ms opacity ease-in-out;
+        transition-delay: 200ms;
+      }
+      .active-img {
+        opacity: 1;
+        z-index: 1;
+        transition-delay: 0ms;
+      }
+      .btn {
+        position: absolute;
+        z-index: 2;
+        background: none;
+        border: none;
+        border-radius: 10px;
+        top: 50%;
+        /* transform: translateY(50%); */
+        font-size: 60px;
+        color: rgba(2, 27, 255, 0.607);
+        background-color: rgba(255, 251, 1, 0.89);
+        cursor: pointer;
+        outline: 1px solid rgba(197, 197, 197, 0.8);
+        box-shadow: 1px 1px 5px 4px rgba(228, 228, 228, 0.519);
+      }
+      .btn:hover{
+        color: blue;
+      }
+      .btn:active{
+        transform: scale(0.8);
+        transition: 0.3s;
+      }
+      #next-btn {
+        right: 1rem;
+      }
+      #prev-btn {
+        left: 1rem;
+      }
+
+      /* For mobile screen */
+      @media (max-width: 548px){
+        body{
+          background-color: black;
+        }
+        .img-container {
+        position: relative;
+        width: 100vw;
+        height: 60vh;
+        margin-top: 120px;
+      }
+      .images {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+      .image > img {
+        width: 100%;
+        height: 100%;
+        display: block;
+        background-position: center;
+        background-size: cover;
+      }
+      .image {
+        position: absolute;
+        opacity: 0;
+        inset: 0;
+        transition: 310ms opacity ease-in-out;
+        transition-delay: 200ms;
+      }
+      .active-img {
+        opacity: 1;
+        z-index: 1;
+        transition-delay: 0ms;
+      }
+      .btn {
+        position: absolute;
+        z-index: 2;
+        background: none;
+        border: none;
+        top: 50%;
+        font-size: 35px;
+        color: rgba(2, 27, 255, 0.607);
+        background-color: rgba(255, 251, 1, 0.63);
+        cursor: pointer;
+        outline: 1px solid rgba(197, 197, 197, 0.8);
+        box-shadow: 1px 1px 5px 4px rgba(228, 228, 228, 0.519);
+      }
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="img-container">
+        <button id="prev-btn" class="btn" data-carousel-button="prev">
+          &#8666;
+        </button>
+        <button id="next-btn" class="btn" data-carousel-button="next">
+          &#8667;
+        </button>
+        <ul class="images">
+          <li class="image active-img">
+            <img
+              src="https://images.unsplash.com/photo-1640718841262-4411c330d66a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+              alt="img1"
+            /> 
+          </li>
+          <li class="image">
+            <img
+              src="https://images.unsplash.com/photo-1611778948399-840d64180923?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+              alt="img2"
+            />
+          </li>
+          <li class="image">
+            <img
+              src="https://images.unsplash.com/photo-1543353071-087092ec393a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80"
+              alt="img3"
+            />
+          </li>
+          <li class="image">
+            <img
+              src="https://images.unsplash.com/photo-1589733955941-5eeaf752f6dd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80"
+              alt="img4"
+            />
+          </li>
+          <li class="image">
+            <img
+              src="https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+              alt="img5"
+            />
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <script>
+      const buttons = document.querySelectorAll(".btn");
+
+      buttons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const temp = button.dataset.carouselButton === "next" ? 1 : -1;
+          const slides = document.querySelector(".images");
+
+          const activeSlide = document.querySelector(".active-img");
+
+          // Get the index of the currently active slide
+          let currentIndex = Array.from(slides.children).indexOf(activeSlide);
+
+          // Calculate the index of the new slide by adding the temp
+          let newIndex = currentIndex + temp;
+
+          //// we have reached the first slide and want to loop back to the last slide. In this case, the newIndex is set to the index of the last slide in the carousel
+          if (newIndex < 0) newIndex = slides.children.length -1;   
+
+          //// we have reached the last slide and want to loop back to the first slide. In this case, the newIndex is set to 0, indicating the first slide
+          if (newIndex >= slides.children.length) newIndex = 0;   
+        
+          //// This line sets the data-active attribute to "true" on the new slide to mark it as the currently active slide.
+          slides.children[newIndex].classList.add("active-img");
+         
+
+          //// This line removes the data-active attribute from the previously active slide, marking it as inactive.
+          activeSlide.classList.remove("active-img");
+        });
+      });
+    </script>
+
+  </body>
+</html>
